@@ -41,6 +41,25 @@ def checksum_all_columns(file1, file2, file_type1='csv', file_type2='csv'):
     
     return matches_df, missing_in_df1_df, missing_in_df2_df
 
+def process_dataframes(file1, file2, file_type1, file_type2):
+    # Call the checksum_all_columns function
+    matches_df, missing_in_df1_df, missing_in_df2_df = checksum_all_columns(file1, file2, file_type1, file_type2)
+    
+    # Add 'status' column
+    matches_df['status'] = 'match'
+    missing_in_df1_df['status'] = 'missing_in_df1'
+    missing_in_df2_df['status'] = 'missing_in_df2'
+    
+    # Rename columns to avoid conflicts
+    matches_df = matches_df.rename(columns={'column': 'variable'})
+    missing_in_df1_df = missing_in_df1_df.rename(columns={'missing_in_df1': 'variable'})
+    missing_in_df2_df = missing_in_df2_df.rename(columns={'missing_in_df2': 'variable'})
+    
+    # Append all DataFrames
+    final_df = pd.concat([matches_df, missing_in_df1_df, missing_in_df2_df], ignore_index=True)
+    
+    return final_df
+
 # Example usage
 # matches_df, missing_in_df1_df, missing_in_df2_df = checksum_all_columns('file1.csv', 'file2.csv', 'csv', 'csv')
 # print("Matches DataFrame:\n", matches_df)
