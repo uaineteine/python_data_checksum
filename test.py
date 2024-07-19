@@ -2,8 +2,8 @@ import checksum_all_columns as ck
 import pandas as pd
 
 # Define your file paths and types
-file1 = 'path/to/your/file1.csv'
-file2 = 'path/to/your/file2.csv'
+file1 = 'testfiles/testfile1.csv'
+file2 = 'testfiles/testfile2.csv'
 file_type1 = 'csv'
 file_type2 = 'csv'
 
