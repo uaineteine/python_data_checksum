@@ -14,4 +14,6 @@ final_df = ck.process_dataframes(file1, file2, file_type1, file_type2)
 output_file = 'output.csv'
 final_df.to_csv(output_file, index=False)
 
+print(final_df)
+
 print(f"Output saved to {output_file}")
