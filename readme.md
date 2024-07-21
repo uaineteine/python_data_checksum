@@ -1,6 +1,8 @@
 # Data Comparison Tool
 This Python script compares two data files (CSV, Parquet, or SAS7BDAT) and computes checksums for common columns. It identifies matching and non-matching columns based on their checksums.
 
+[![Test checksum_all_columns](https://github.com/uaineteine/python_data_checksum/actions/workflows/test.yaml/badge.svg)](https://github.com/uaineteine/python_data_checksum/actions/workflows/test.yaml)
+
 ## Usage
 Clone this repository:
 git clone https://github.com/your-username/data-comparison-tool.git
