@@ -1,22 +1,19 @@
+import os
 import pandas as pd
 import hashlib
 
-def checksum_all_columns(file1, file2, file_type1='csv', file_type2='csv'):
-    # Load the first file
-    if file_type1 == 'parquet':
-        df1 = pd.read_parquet(file1)
-    elif file_type1 == 'sas7bdat':
-        df1 = pd.read_sas(file1, format='sas7bdat')
+def load_file(file_path):
+    _, file_extension = os.path.splitext(file_path)
+    if file_extension == '.parquet':
+        return pd.read_parquet(file_path)
+    elif file_extension == '.sas7bdat':
+        return pd.read_sas(file_path, format='sas7bdat')
     else:
-        df1 = pd.read_csv(file1)
-    
-    # Load the second file
-    if file_type2 == 'parquet':
-        df2 = pd.read_parquet(file2)
-    elif file_type2 == 'sas7bdat':
-        df2 = pd.read_sas(file2, format='sas7bdat')
-    else:
-        df2 = pd.read_csv(file2)
+        return pd.read_csv(file_path)
+
+def checksum_all_columns(file1, file2):
+    df1 = load_file(file1)
+    df2 = load_file(file2)
     
     # Find common columns
     common_columns = set(df1.columns).intersection(set(df2.columns))
@@ -33,9 +30,9 @@ def checksum_all_columns(file1, file2, file_type1='csv', file_type2='csv'):
             non_matches.append({'column': column, 'checksum': checksum1})
     return pd.DataFrame(matches), pd.DataFrame(non_matches)
 
-def process_dataframes(file1, file2, file_type1, file_type2):
+def process_dataframes(file1, file2):
     # Call the checksum_all_columns function
-    matches_df, non_matching_df = checksum_all_columns(file1, file2, file_type1, file_type2)
+    matches_df, non_matching_df = checksum_all_columns(file1, file2)
 
     # Add 'status' column
     matches_df['status'] = 'match'
