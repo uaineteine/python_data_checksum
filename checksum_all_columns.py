@@ -20,8 +20,6 @@ def checksum_all_columns(file1, file2, file_type1='csv', file_type2='csv'):
     
     # Find common columns
     common_columns = set(df1.columns).intersection(set(df2.columns))
-    missing_in_df1 = set(df2.columns) - set(df1.columns)
-    missing_in_df2 = set(df1.columns) - set(df2.columns)
     
     # Compute checksums for the common columns
     matches = []
