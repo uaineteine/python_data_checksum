@@ -27,4 +27,5 @@ jobs:
         pip install pandas
 
     - name: Run tests
-      run: python test.py
+      run: python execute.py "testfiles/testfile1.csv" "testfiles/testfile2.csv" testoutput.csv
+
